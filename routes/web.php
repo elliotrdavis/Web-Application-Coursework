@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::post('/hi', [PageController::class, 'store']);
 
-Route::get('/user', function () {
-    return "Hello";
-});
+Route::get('/page/{id}', [PageController::class, 'show']);
+
+
+
+
+
+
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+//Route::get('/user', function () {
+//    return "Hello";
+//});
