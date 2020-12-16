@@ -17,11 +17,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Pages
-Route::get('/pages', [PageController::class, 'index'])->name('pages.index');
+Route::get('/', [PageController::class, 'index'])->name('pages.index');
 
 Route::get('/pages/{page}', [PageController::class, 'show'])->name('pages.show');
 
 // Users
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+
 Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
 
 // Posts
@@ -29,12 +31,6 @@ Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 
+Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
 
-
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-
-//Route::get('/user', function () {
-//    return "Hello";
-//});
+Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
