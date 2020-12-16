@@ -14,4 +14,11 @@
             Description: {{ $page->description }}
         </div>
     </body>
+
+    <p>Posts:</p>
+    Total posts for this page: {{ $page->posts->count() }}
+    @foreach($page->posts as $post)
+        <li>{{ $post->title }}</li>
+    @endforeach
+
 </html>
