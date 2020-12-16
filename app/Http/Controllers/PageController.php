@@ -10,30 +10,28 @@ use Illuminate\Http\Request;
 class PageController extends Controller
 {
 
-    public function show($id)
+    public function show($page)
     {
-        return view('pages.page', [
-            'page' => Page::findOrFail($id)
-        ]);
+        //return view('pages.show', ['page' => $page]);
+        return view('pages.show', ['page' => Page::findOrFail($page)]);
     }
 
     public function index()
     {
-        $pages = Page::all();
-        return view('pages.index', ['pages' => $pages]);
+        return view('pages.index', ['pages' => Page::all()]);
     }
 
     public function store(Request $request) 
     {
-        $validated = $request->validate([
-            'title' => 'required|unique:pages|max:255',
-            'description' => 'required'
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required',
         ]);
 
         $p = new Page;
 
-        $p->title = $validated['title'];
-        $p->description = $validated['description'];
+        $p->title = $validatedData['title'];
+        $p->description = $validatedData['description'];
         $p->save();
 
         session()->flash('message', 'Page Created');

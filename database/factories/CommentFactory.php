@@ -25,6 +25,7 @@ class CommentFactory extends Factory
             // General post id and random body.
             'body' => $this->faker->paragraph($nbSentences = 1, $variableNbSentences = true),
             'post_id'=>\App\Models\Post::inRandomOrder()->first()->id,
+            'user_id'=>\App\Models\User::inRandomOrder()->first()->id,
         ];
     }
 }

@@ -1,15 +1,17 @@
-@extends('layouts.welcome')
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Kayak Forum</title>
+    </head>
 
-@section('title')
-    Pages
-@endsection
+    <body>
+        <h1>Kayak Forum</h1>
+    </body>
 
-@section('content')
-    <p> List of Pages </p>
-    <ul>
-        @foreach($pages as $page)
-            <li> {{ $page->title }} </li>
-        @endforeach
-    </ul>
 
-@endsection
+@foreach($pages as $page)
+<li><a href="{{ route('pages.show', ['page' => $page]) }}">{{ $page->title }}</a></li>
+@endforeach
+
+
+</html>

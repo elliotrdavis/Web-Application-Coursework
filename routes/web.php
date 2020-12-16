@@ -14,11 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/hi', [PageController::class, 'store']);
+Route::get('/pages', [PageController::class, 'index'])->name('pages.store');
 
-Route::get('/page/{id}', [PageController::class, 'show']);
-
-
+Route::get('/pages/{page}', [PageController::class, 'show'])->name('pages.show');
 
 
 

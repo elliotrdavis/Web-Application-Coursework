@@ -25,11 +25,11 @@ class CreateCommentsTable extends Migration
         // Create foreign key for post and page one-many relationship.
         $table->foreign('post_id')->references('id')->on('posts')
             ->onDelete('cascade')->onUpdate('cascade');
-        });
-
+    
         // Create foreign keys for comment and user one-many relationship
         $table->foreign('user_id')->references('id')->on('users')
             ->onDelete('cascade')->onUpdate('cascade');
+        });
     }
 
     /**
