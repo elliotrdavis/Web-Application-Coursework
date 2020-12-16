@@ -21,26 +21,4 @@ class PageController extends Controller
         return view('pages.index', ['pages' => Page::all()]);
     }
 
-    public function store(Request $request) 
-    {
-        $validatedData = $request->validate([
-            'title' => 'required|max:255',
-            'description' => 'required',
-        ]);
-
-        $p = new Page;
-
-        $p->title = $validatedData['title'];
-        $p->description = $validatedData['description'];
-        $p->save();
-
-        session()->flash('message', 'Page Created');
-
-        return redirect()->route('pages.index');
-    }
-
-
-
-
-
 }

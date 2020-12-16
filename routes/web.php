@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Pages
 Route::get('/pages', [PageController::class, 'index'])->name('pages.store');
 
 Route::get('/pages/{page}', [PageController::class, 'show'])->name('pages.show');
+
+// Users
+Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
 
 
 
