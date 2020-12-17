@@ -1,17 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Kayak Forum</title>
-    </head>
+@extends('layouts.app')
 
-    <body>
-        <h1>Kayak Forum</h1>
-    </body>
+@section('title', 'Home')
 
-
-@foreach($pages as $page)
-<li><a href="{{ route('pages.show', ['page' => $page]) }}">{{ $page->title }}</a></li>
-@endforeach
-
-
-</html>
+@section('content')
+    @foreach($pages as $page)
+        <li><a href="{{ route('pages.show', ['page' => $page]) }}">{{ $page->title }}</a></li>
+    @endforeach
+@endsection

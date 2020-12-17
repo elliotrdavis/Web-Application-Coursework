@@ -1,24 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Kayak Forum - {{ $page->id }}</title>
-    </head>
+@extends('layouts.app')
 
-    <body>
-        <h1>Kayak Forum: Page - {{ $page->id }}</h1>
+@section('title')
+    Page {{ $page->id }}
+@endsection
 
-        <div>
-            Title: {{ $page->title }}
-        </div>
-        <div>
-            Description: {{ $page->description }}
-        </div>
-    </body>
+@section('content')
+    <div>
+        Title: {{ $page->title }}
+    </div>
 
-    <p>Posts:</p>
+    <div>
+        Description: {{ $page->description }}
+    </div>
+
     Total posts for this page: {{ $page->posts->count() }}
     @foreach($page->posts as $post)
         <li>{{ $post->title }}</li>
     @endforeach
-
-</html>
+@endsection
