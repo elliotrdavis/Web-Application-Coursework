@@ -23,4 +23,5 @@
         <input type="submit" value="Submit">
         <a href="{{ route('posts.index') }}">Cancel</a>
     </form>
+
 @endsection

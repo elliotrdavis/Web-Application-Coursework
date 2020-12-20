@@ -23,4 +23,5 @@
     @foreach($user->comments as $comment)
         <li>{{ $comment->body }}</li>
     @endforeach
+
 @endsection
