@@ -7,34 +7,36 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Elliot's Blog</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}" >
+   </head>
 <body>
-    <div><a href="{{ url()->previous() }}">Back</a></div>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
+        <nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm site-header sticky-top">
+            <div class="container-fluid">
+                <div class="navbar header">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    <b>Elliot's Blog</b>
+                </a>
+                </div>
+
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <li class="nav-item"><a class="nav-link" href="/pages/1">White Water</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/pages/1">Canoe Slalom</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/pages/1">Canoe Polo</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/pages/1">Off Topic</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">About/Contact</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -72,6 +74,7 @@
                             </li>
                         @endguest
                     </ul>
+
                 </div>
             </div>
         </nav>
