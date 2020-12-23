@@ -6,7 +6,7 @@
 
 @section('content')
     <div>
-        Name: {{ $user->title }}
+        Name: {{ $user->name }}
     </div>
     <div>
         Email: {{ $user->email }}

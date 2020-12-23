@@ -16,21 +16,22 @@
 
 
 <div class="container">
-	<h2 class="text-center">Laravel infinite scroll pagination</h2>
+    <h2 class="text-center">All Posts</h2>
 	<br/>
 	<div class="col-md-12" id="post-data">
 		@include('data')
 	</div>
 </div>
+
 <div class="ajax-load text-center" style="display:none">
-	<p><img src="http://demo.itsolutionstuff.com/plugin/loader.gif">Loading More post</p>
+	<p>Loading More post</p>
 </div>
 
 
 <script type="text/javascript">
 	var page = 1;
 	$(window).scroll(function() {
-	    if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+	    if($(window).scrollTop() + $(window).height() >= $(document).height()-1) {
 	        page++;
 	        loadMoreData(page);
 	    }
