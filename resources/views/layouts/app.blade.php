@@ -10,10 +10,8 @@
     <title>Elliot's Blog</title>
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="css/app.css" rel="stylesheet" type="text/css" >
+    <link href="/css/app.css" rel="stylesheet" type="text/css" >
 
-
-    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -21,26 +19,37 @@
    </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm site-header sticky-top">
-            <div class="container-fluid">
-                <div class="navbar header">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+        <div class='img-container'>
+            <img src="{{URL::asset('/img/background/IMG_5645.JPG')}}" class="img-fluid"/>
+            <a class='img-text d-flex justify-content-center' href="{{ url('/') }}"><b>Elliot's Blog</b></a>
+        </div>
 
-                <a class="navbar-brand ml-1" href="{{ url('/') }}">
-                    <b>Elliot's Blog</b>
-                </a>
-                </div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm site-header sticky-top">
+            <a class="navbar-brand ml-1" href="{{ url('/') }}"><b>Elliot's Blog</b></a>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+              
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item"><a class="nav-link" href="/pages/1">White Water</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/pages/1">Canoe Slalom</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/pages/1">Canoe Polo</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/pages/1">Off Topic</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">About/Contact</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/pages/1"><b>White Water</b></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/pages/2"><b>Canoe Slalom</b></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/pages/3"><b>Canoe Polo</b></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/pages/4"><b>Off Topic</b></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><b>About/Contact</b></a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -80,7 +89,7 @@
                     </ul>
 
                 </div>
-            </div>
+            
         </nav>
 
         <main class="py-4">

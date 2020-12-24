@@ -1,19 +1,9 @@
 @extends('layouts.app')
 
 @section('title', 'Home')
-
 @section('content')
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-
-  	<style type="text/css">
-  		.ajax-load{
-  			background: #e1e1e1;
-		    padding: 10px 0px;
-		    width: 100%;
-  		}
-  	</style>
-
 
 <div class="container">
     <h2 class="text-center">All Posts</h2>
