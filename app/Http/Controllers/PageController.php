@@ -25,10 +25,10 @@ class PageController extends Controller
             return response()->json(['html'=>$view]);
         }
 
-    	return view('pages.index',compact('posts'));
+    	return view('pages.home',compact('posts'));
     }
 
-    public function index(Request $request)
+    public function home(Request $request)
     {
         $posts = Post::orderBy('created_at', 'desc')->paginate(5);
 
@@ -37,7 +37,7 @@ class PageController extends Controller
             return response()->json(['html'=>$view]);
         }
 
-    	return view('pages.index',compact('posts'));
+    	return view('pages.home',compact('posts'));
     }
 
     public function apiIndex()

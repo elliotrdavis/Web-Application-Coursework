@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Pages
-Route::get('/', [PageController::class, 'index'])->name('pages.index');
+// Pages/Home page
+Route::get('/', [PageController::class, 'home'])->name('pages.home');
 
 Route::get('/pages/{page}', [PageController::class, 'show'])->name('pages.show');
 
