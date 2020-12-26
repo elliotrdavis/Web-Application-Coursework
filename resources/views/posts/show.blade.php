@@ -9,11 +9,11 @@
     <div class="title">
         <h1>{{ $post->title }}</h1>
     </div>
-    <div class="posted-by border-bottom">
+    <div class="posted-by grey border-bottom">
         <h4>by <a href="{{ route('users.show', ['user' => $post->user]) }}">{{ $post->user->name}}</a></h4>
     </div>
 
-    <div class="date_posted border-bottom my-2">
+    <div class="date_posted grey border-bottom my-2">
         <h5> Posted on {{ $post->created_at->format('jS F Y h:i:s A')}}</h5>
     </div>
 
