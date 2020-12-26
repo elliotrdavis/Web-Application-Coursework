@@ -30,14 +30,26 @@ class PageController extends Controller
 
     public function home(Request $request)
     {
-        $posts = Post::orderBy('created_at', 'desc')->paginate(5);
+
+        $posts = Post::where([
+            ['title', '!=', Null],
+            [function ($query) use ($request) {
+                if(($term = $request->term)) {
+                    $query->orWhere('title', 'LIKE', '%' . $term . '%')->get();
+                }
+            }]
+        ])
+        ->orderBy('created_at', 'desc')->paginate(5);
+
+        //$posts = Post::orderBy('created_at', 'desc')->paginate(5);
 
         if ($request->ajax()) {
     		$view = view('data',compact('posts'))->render();
             return response()->json(['html'=>$view]);
         }
 
-    	return view('pages.home',compact('posts'));
+        //return view('pages.home',compact('posts'));
+        return view('pages.home',compact('posts'));
     }
 
     public function apiIndex()

@@ -54,6 +54,11 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        <form class="form-inline my-2 my-lg-0" action="{{ route('pages.home') }}" method="GET" role="search" >
+                            <input class="form-control mr-sm-2" type="text" name="term" placeholder="Search projects" id="term">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
@@ -74,12 +79,14 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="dropdown-item" href="{{ route('users.show', ['user' => Auth::user()]) }}">My Profile</a>
+
+                                    <a class="dropdown-item" href="{{ route('logout') }}"F
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
+                                    
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
