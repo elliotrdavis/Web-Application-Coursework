@@ -22,12 +22,6 @@ class PostController extends Controller
         return view('posts.index', ['posts' => Post::all()]);
     }
 
-    public function create()
-    {
-        $pages = Page::orderBy('title', 'asc')->get();
-        return view('posts.create', ['pages' => $pages]);
-    }
-
     public function store(Request $request)
     {
         $user_id = Auth::user()->id;
@@ -45,7 +39,7 @@ class PostController extends Controller
         $p->save();
 
         session()->flash('message', 'Post was created.');
-        return redirect()->route('posts.index');
+        return redirect()->route('pages.home');
     }
 
     public function destroy(Post $post)
