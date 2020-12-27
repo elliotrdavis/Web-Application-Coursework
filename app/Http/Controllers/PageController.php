@@ -20,6 +20,7 @@ class PageController extends Controller
         //Post::where('page', '=', $page)->orderBy('created_at', 'desc')->paginate(5);
         $posts = Post::where('page_id', $page)->orderBy('created_at', 'desc')->paginate(5);
 
+
         if ($request->ajax()) {
     		$view = view('data',compact('posts'))->render();
             return response()->json(['html'=>$view]);

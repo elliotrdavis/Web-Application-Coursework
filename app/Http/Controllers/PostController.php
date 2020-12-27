@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\Page;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class PostController extends Controller
@@ -29,17 +30,17 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
+        $user_id = Auth::user()->id;
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'body' => 'required',
-            'user_id' => 'required|integer',
             'page_id' => 'required|integer',
         ]);
 
         $p = new Post;
         $p->title = $validatedData['title'];
         $p->body = $validatedData['body'];
-        $p->user_id = $validatedData['user_id'];
+        $p->user_id = $user_id;
         $p->page_id = $validatedData['page_id'];
         $p->save();
 

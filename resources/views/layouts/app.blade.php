@@ -36,19 +36,19 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/pages/1"><b>White Water</b></a>
+                            <a @if(Request::is('pages/1') == 1) class="nav-link active" @else class="nav-link" @endif href="/pages/1"><b>White Water</b></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/pages/2"><b>Canoe Slalom</b></a>
+                            <a @if(Request::is('pages/2') == 1) class="nav-link active" @else class="nav-link" @endif href="/pages/2"><b>Canoe Slalom</b></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/pages/3"><b>Canoe Polo</b></a>
+                            <a @if(Request::is('pages/3') == 1) class="nav-link active" @else class="nav-link" @endif href="/pages/3"><b>Canoe Polo</b></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/pages/4"><b>Off Topic</b></a>
+                            <a @if(Request::is('pages/4') == 1) class="nav-link active" @else class="nav-link" @endif href="/pages/4"><b>Off Topic</b></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><b>About/Contact</b></a>
+                            <a @if(Request::is('pages/5') == 1) class="nav-link active" @else class="nav-link" @endif href="#"><b>About/Contact</b></a>
                         </li>
                     </ul>
 
