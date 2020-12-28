@@ -36,6 +36,10 @@ Route::post('/posts/{post}', [CommentController::class, 'store'])->name('comment
 
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 
+Route::get('/posts/edit/{post}', [PostController::class, 'edit'])->name('posts.edit');
+
+Route::post('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
+
 Route::delete('posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 
 // Auth
