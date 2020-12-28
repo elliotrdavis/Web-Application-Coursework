@@ -13,8 +13,22 @@
         <h4>by <a href="{{ route('users.show', ['user' => $post->user]) }}">{{ $post->user->name}}</a></h4>
     </div>
 
-    <div class="date_posted grey border-bottom my-2">
-        <h5> Posted on {{ $post->created_at->format('jS F Y h:i:s A')}}</h5>
+    <div class="row date_posted grey border-bottom my-2">
+        <div class="col-md-auto my-auto">
+            <h5> Posted on {{ $post->created_at->format('jS F Y h:i:s A')}}</h5>
+        </div>
+        @if(Auth::id() === $post->user->id)
+        <div class="col-md-auto my-2">
+            <a href="{{ route('posts.edit', ['post' => $post]) }}" class="btn btn-primary active" role="button" aria-pressed="true">Edit</a>
+        </div>
+        <div class="col-md-auto my-2">
+            <form method="POST" action="{{ route('posts.destroy', ['post' => $post->id]) }}" >
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-primary active" role="button" aria-pressed="true">Delete</button>
+            </form>
+        </div>
+        @endif
     </div>
 
 
@@ -51,20 +65,24 @@
                 <a href="{{ route('users.show', ['user' => $comment->user]) }}"><h6 class="mt-auto">{{ $comment->user->name}}</h6></a>
                     <span class="ml-2">{{ $comment->created_at }}</span>
             </div>
+            @if(Auth::id() === $comment->user->id)
+                <div class="col-md-auto my-2">
+                    <a href="{{ route('comments.edit', ['comment' => $comment]) }}" class="btn btn-primary active" role="button" aria-pressed="true">Edit</a>
+                </div>
+                <div class="col-md-auto my-2">
+                    <form method="POST" action="{{ route('comments.destroy', ['comment' => $comment->id]) }}" >
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-primary active" role="button" aria-pressed="true">Delete</button>
+                    </form>
+                </div>
+            @endif
             <div class="comment-text-sm">
                 <span>{{ $comment->body }}</span>
             </div>
         </div>
     </div>		
     @endforeach
-    
-					
-
-    <form method="POST" action="{{ route('posts.destroy', ['post' => $post->id]) }}">
-        @csrf
-        @method('DELETE')
-        <button type="submit">Delete</button>
-    </form>
-    </div>
+</div>
 
 @endsection

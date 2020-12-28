@@ -38,9 +38,17 @@ Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show')
 
 Route::get('/posts/edit/{post}', [PostController::class, 'edit'])->name('posts.edit');
 
-//Route::post('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
+Route::post('/posts/update/{post}', [PostController::class, 'update'])->name('posts.update');
 
 Route::delete('posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+
+// Edit/Delete Comments
+
+Route::get('/comments/edit/{comment}', [CommentController::class, 'edit'])->name('comments.edit');
+
+Route::post('/comments/update/{comment}', [CommentController::class, 'update'])->name('comments.update');
+
+Route::delete('comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 
 // Auth
 Auth::routes();

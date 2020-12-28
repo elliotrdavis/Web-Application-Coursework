@@ -29,4 +29,42 @@ class CommentController extends Controller
         return redirect()->route('posts.show', ['post' => $post]);
     }
 
+    public function edit(Comment $comment)
+    {
+        if(Auth::user()->id === $comment->user->id) {
+            return view('comments.edit', ['comment' => $comment]);
+        } else {
+            return abort(403);
+        }
+        return false;
+    }
+
+    public function update(Request $request, Comment $comment)
+    {
+        $post_id = $comment->post->id;
+        $validatedData = $request->validate([
+            'body' => 'required',
+        ]);
+
+        $c = Comment::find($comment->id);
+        $c->body = $validatedData['body'];
+        $c->user_id = Auth::user()->id;
+        $c->post_id = $post_id;
+        $c->save();
+    
+        return redirect()->route('posts.show', ['post'=>$comment->post->id])->with('success','Product updated successfully');
+    }
+
+    public function destroy(Comment $comment)
+    {
+
+        if(Auth::user()->id === $comment->user->id) {
+            $comment->delete();
+            return redirect()->route('posts.show', ['post'=>$comment->post->id])->with('message', 'Comment was deleted.');
+        } else {
+            return abort(403);
+        }
+        return false;
+    }
+
 }

@@ -48,7 +48,7 @@ class PostController extends Controller
         if(Auth::user()->id === $post->user->id) {
             return view('posts.edit', ['post' => $post]);
         } else {
-            return abort(404);
+            return abort(403);
         }
         
         return false;
@@ -74,9 +74,14 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
-        $post->delete();
 
-        return redirect()->route('posts.index')->with('message', 'Post was deleted.');
+        if(Auth::user()->id === $post->user->id) {
+            $post->delete();
+            return redirect()->route('pages.home')->with('message', 'Post was deleted.');
+        } else {
+            return abort(403);
+        }
+        return false;
     }
 
 }
