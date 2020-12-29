@@ -30,17 +30,23 @@ class PostController extends Controller
             'title' => 'required|max:255',
             'body' => 'required',
             'page_id' => 'required|integer',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
+        $imageName = time().'.'.$request->image->extension(); 
+        $request->image->move(public_path('img'), $imageName);
 
         $p = new Post;
         $p->title = $validatedData['title'];
         $p->body = $validatedData['body'];
-        $p->user_id = $user_id;
+        $p->user_id = Auth::user()->id;
         $p->page_id = $validatedData['page_id'];
+        $p->image = $imageName;
         $p->save();
 
-        session()->flash('message', 'Post was created.');
-        return redirect()->route('pages.home');
+        return redirect()->route('pages.home')
+            ->with('success','Post updated successfully')
+            ->with('image',$imageName);
     }
 
     public function edit(Post $post)
@@ -54,22 +60,34 @@ class PostController extends Controller
         return false;
     }
 
+    public function imageUpload()
+    {
+        return view('imageUpload');
+    }
+
     public function update(Request $request, Post $post)
     {
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'body' => 'required',
             'page_id' => 'required|integer',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
+        $imageName = time().'.'.$validatedData->image->extension(); 
+        $request->image->move(public_path('img'), $imageName);
 
         $p = Post::find($post->id);
         $p->title = $validatedData['title'];
         $p->body = $validatedData['body'];
         $p->user_id = Auth::user()->id;
         $p->page_id = $validatedData['page_id'];
+        $p->image = $imageName;
         $p->save();
     
-        return redirect()->route('pages.home')->with('success','Product updated successfully');
+        return redirect()->route('pages.home')
+            ->with('success','Post updated successfully')
+            ->with('image',$imageName);
     }
 
     public function destroy(Post $post)

@@ -25,6 +25,8 @@
 
 			<div class="body-middle bg-white p-2 px-4">
 				{{ \Illuminate\Support\Str::limit($post->body, 100) }}...
+				<img class="rounded-circle" src="{{asset('/img/' .$post->image)}}" width="200"/> <!-- Display images -->
+				{{ $post->image }}
 			</div>
 
 			<div class="read-more ml-auto mr-5 bg-white">

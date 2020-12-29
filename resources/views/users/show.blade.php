@@ -9,11 +9,50 @@ User {{ $user->id }}
 <div class="container mb-5 bg-white border rounded shadow p-3">
 	<div class="row mx-1 border-bottom">
 		<div class="profile-image col-md-auto">
-			<img class="rounded-circle" src="{{URL::asset('/img/user.png')}}" alt="profile avatar" width="200">
-		</div>
+            <img class="rounded-circle" src="{{asset('/img/' .$user->avatar)}}" width="200"/> <!-- show profile image -->
+            {{ $user->avatar }}
+            <div class="row ml-2 mt-2">
+                <!-- Upload image -->
+                <form action="/avatar-upload" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                        <input type="file" class="form-control-file" name="avatar" id="avatarFile" aria-describedby="fileHelp">
+                        <small id="fileHelp" class="form-text text-muted">Change your avatar here!</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <!-- Error message -->
+            <div class="row justify-content-center">
+                <div class="row">
+                    @if ($message = Session::get('success'))
+                        <div class="alert alert-success alert-block">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <strong>{{ $message }}</strong>
+                        </div>
+                    @endif
+
+                    @if (count($errors) > 0)
+                        <div class="alert alert-danger">
+                            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+        
+        <!-- User info -->
 		<div class="col">
 			<div class="name">
-				<h1> {{ $user->name }} </h1>
+                <h1> {{ $user->name }} </h1> 
+                @if(Auth::id() === $user->id)
+                    <a href="{{ route('users.edit', ['user' => $user]) }}" class="btn btn-primary active" role="button" aria-pressed="true">Edit Profile</a>
+                @endif
 			</div>
 			<div class="bio grey">
 				<h5> About me: {{ $user->bio }} </h5>

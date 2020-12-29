@@ -6,56 +6,98 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 
 <div class="container">
-	<h2 class="text-center">All Posts</h2>
-	@guest
-<div class="container mb-5 col-md-7 bg-white border rounded shadow p-1">
-	<div class="row my-2 ml-1 container-fluid border-bottom">
-		<h5>Please login to post</h5>
-	</div>
-</div>
-@else
 
-<div class="container mb-5 col-md-7 bg-white border rounded shadow p-1">
-	<div class="row my-2 ml-1 container-fluid border-bottom">
-		<h3>Create Post</h3>
-	</div>
-	<form method="POST" action="{{ route('posts.store') }}">
-		@csrf
-	<div class="row container-fluid border-bottom">
-		<div class="col-md-auto">
-			<img class="rounded-circle" src="{{URL::asset('/img/user.png')}}" alt="profile avatar" width="70">
+	<!-- Title -->
+
+	<h2 class="text-center">All Posts</h2>
+
+	<!-- Not logged in --> 
+	@guest
+	<div class="container mb-5 col-md-7 bg-white border rounded shadow p-1">
+		<div class="row my-2 ml-1 container-fluid border-bottom">
+			<h5>Please login to post</h5>
 		</div>
-		
-		<div class="col my-auto container-fluid">
+	</div>
+
+	<!-- If logged in -->
+
+	@else
+
+	<!-- Create post container -->
+
+	<div class="container mb-5 col-md-7 bg-white border rounded shadow p-1">
+		<div class="row my-2 ml-1 container-fluid border-bottom">
+			<h3>Create Post</h3> <!-- Create post -->
+		</div>
+		<form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
+			@csrf
+			<div class="row container-fluid border-bottom">
+				<div class="col-md-auto">
+					<img class="rounded-circle" src="{{URL::asset('/img/user.png')}}" alt="profile avatar" width="70"> <!-- Profile picture -->
+				</div>
+				
+				<div class="col my-auto container-fluid">
+					<div>
+						<input class="container-fluid my-1" type="text" name="title" placeholder="Enter Title here {{ Auth::user()->name }}." value="{{ old('title') }}"> <!-- Title form -->
+					</div>
+					<div>Page ID: <!-- Page id form -->
+						<select class="mb-2" name="page_id">
+							<option @if(Request::is('pages/1') == 1) selected="selected" @endif value="1">White Water</option>
+							<option @if(Request::is('pages/2') == 1) selected="selected" @endif value="2">Canoe Slalom</option>
+							<option @if(Request::is('pages/3') == 1) selected="selected" @endif value="3">Canoe Polo</option>
+							<option @if(Request::is('pages/4') == 1) selected="selected" @endif value="4">Off Topic</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="row my-2 ml-1 container-fluid">
+				<textarea class="text-muted container-fluid" name="body" placeholder="Hi {{ Auth::user()->name }}, what's on your mind today?"></textarea> <!-- body -->
+			</div>
+			<!-- Image upload -->
 			<div>
-				<input class="container-fluid my-1" type="text" name="title" placeholder="Enter Title here {{ Auth::user()->name }}." value="{{ old('title') }}">
+				<input type="file" class="form-control-file" name="image" id="imageFile" aria-describedby="fileHelp">
+				<small id="fileHelp" class="form-text text-muted">Upload image!</small>
 			</div>
-			<div>Page ID:
-				<select class="mb-2" name="page_id">
-					<option @if(Request::is('pages/1') == 1) selected="selected" @endif value="1">White Water</option>
-					<option @if(Request::is('pages/2') == 1) selected="selected" @endif value="2">Canoe Slalom</option>
-					<option @if(Request::is('pages/3') == 1) selected="selected" @endif value="3">Canoe Polo</option>
-					<option @if(Request::is('pages/4') == 1) selected="selected" @endif value="4">Off Topic</option>
-				</select>
+			<!-- Submit button -->
+			<div class="row my-2 ml-1 container-fluid">
+				<input class="btn btn-primary active" aria-pressed="true" type="submit" value="Submit"> <!-- Submit button -->
+			</div>
+		</form>
+		<!-- Error messages -->
+		<div class="row justify-content-center">
+			<div class="row">
+				@if ($message = Session::get('success'))
+					<div class="alert alert-success alert-block">
+						<button type="button" class="close" data-dismiss="alert">×</button>
+						<strong>{{ $message }}</strong>
+					</div>
+				@endif
+
+				@if (count($errors) > 0)
+					<div class="alert alert-danger">
+						<strong>Whoops!</strong> There were some problems with your input.<br><br>
+						<ul>
+							@foreach ($errors->all() as $error)
+								<li>{{ $error }}</li>
+							@endforeach
+						</ul>
+					</div>
+				@endif
 			</div>
 		</div>
 	</div>
-	<div class="row my-2 ml-1 container-fluid">
-		<textarea class="text-muted container-fluid" name="body" placeholder="Hi {{ Auth::user()->name }}, what's on your mind today?"></textarea>
-	</div>
-	<div class="row my-2 ml-1 container-fluid">
-		<input class="btn btn-primary active" aria-pressed="true" type="submit" value="Submit">
-	</div>
-</form>
-</div>
-@endguest
+
+	@endguest
+
+	<!-- Load posts -->
+
 	<br/>
 	<div class="col-md-12" id="post-data">
 		@include('data')
 	</div>
 </div>
 
-
+	<!-- Infinite scroll -->
 
 <div class="ajax-load text-center" style="display:none">
 	<p>Loading More post</p>

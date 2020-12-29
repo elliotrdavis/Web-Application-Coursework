@@ -4,6 +4,8 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ImageUploadController;
+use App\Http\Controllers\AvatarUploadController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +29,10 @@ Route::get('/users', [UserController::class, 'index'])->name('users.index');
 
 Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
 
+Route::get('/users/edit/{user}', [UserController::class, 'edit'])->name('users.edit');
+
+Route::post('/users/update/{user}', [UserController::class, 'update'])->name('users.update');
+
 // Posts
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 
@@ -49,6 +55,18 @@ Route::get('/comments/edit/{comment}', [CommentController::class, 'edit'])->name
 Route::post('/comments/update/{comment}', [CommentController::class, 'update'])->name('comments.update');
 
 Route::delete('comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+
+// Upload avatar
+
+Route::get('avatar-upload', [ AvatarUploadController::class, 'avatarUpload' ])->name('avatar.upload');
+
+Route::post('avatar-upload', [ AvatarUploadController::class, 'avatarUploadPost' ])->name('avatar.upload.post');
+
+// Upload for post images
+
+Route::get('image-upload', [ ImageUploadController::class, 'imageUpload' ])->name('image.upload');
+
+Route::post('image-upload', [ ImageUploadController::class, 'imageUploadPost' ])->name('image.upload.post');
 
 // Auth
 Auth::routes();

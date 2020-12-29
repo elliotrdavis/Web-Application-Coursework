@@ -62,21 +62,20 @@
         </div>
         <div class="d-flex flex-column ml-3">
             <div class="d-flex flex-row post-title">
-                <a href="{{ route('users.show', ['user' => $comment->user]) }}"><h6 class="mt-auto">{{ $comment->user->name}}</h6></a>
-                    <span class="ml-2">{{ $comment->created_at }}</span>
-            </div>
-            @if(Auth::id() === $comment->user->id)
-                <div class="col-md-auto my-2">
-                    <a href="{{ route('comments.edit', ['comment' => $comment]) }}" class="btn btn-primary active" role="button" aria-pressed="true">Edit</a>
-                </div>
-                <div class="col-md-auto my-2">
+                <a href="{{ route('users.show', ['user' => $comment->user]) }}"><h6 class="mt-2">{{ $comment->user->name}}</h6></a>
+                    <span class="ml-2 mt-1">{{ $comment->created_at->diffForHumans()}}</span>
+                @if(Auth::id() === $comment->user->id)
+                
+                    <a href="{{ route('comments.edit', ['comment' => $comment]) }}" class="btn btn-link btn-sm">Edit</a>
+            
                     <form method="POST" action="{{ route('comments.destroy', ['comment' => $comment->id]) }}" >
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-primary active" role="button" aria-pressed="true">Delete</button>
+                        <button type="submit" class="btn btn-link btn-sm">Delete</button>
                     </form>
-                </div>
-            @endif
+                @endif
+            </div>
+            
             <div class="comment-text-sm">
                 <span>{{ $comment->body }}</span>
             </div>
