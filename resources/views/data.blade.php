@@ -6,7 +6,7 @@
         <div class="d-flex flex-column col-md-8 bg-white border rounded shadow p-3">
             <div class="d-flex flex-row align-items-center text-left comment-top p-2 bg-white border-bottom px-4">
                 <div class="profile-image">
-					<img class="rounded-circle" src="{{URL::asset('/img/user.png')}}" alt="profile avatar" width="70">
+					<img class="rounded-circle" src="{{asset('/img/' .$post->user->avatar)}}" width="70"/>
 				</div>
                 <div class="d-flex flex-column ml-3">
                     <div class="d-flex flex-row post-title">
@@ -23,10 +23,14 @@
                 </div>
 			</div>
 
+			<div class="image-post d-flex justify-content-center bg-white p-2 px-4">
+				@if($post->image)
+					<img class="img-fluid" src="{{asset('/img/' .$post->image)}}"/> <!-- Display images -->
+				@endif
+			</div>
+
 			<div class="body-middle bg-white p-2 px-4">
 				{{ \Illuminate\Support\Str::limit($post->body, 100) }}...
-				<img class="rounded-circle" src="{{asset('/img/' .$post->image)}}" width="200"/> <!-- Display images -->
-				{{ $post->image }}
 			</div>
 
 			<div class="read-more ml-auto mr-5 bg-white">

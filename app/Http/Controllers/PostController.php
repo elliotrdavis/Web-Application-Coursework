@@ -30,11 +30,14 @@ class PostController extends Controller
             'title' => 'required|max:255',
             'body' => 'required',
             'page_id' => 'required|integer',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
-        $imageName = time().'.'.$request->image->extension(); 
-        $request->image->move(public_path('img'), $imageName);
+        $imageName = null;
+        if($request->image) {
+            $imageName = time().'.'.$request->image->extension(); 
+            $request->image->move(public_path('img'), $imageName);
+        }
 
         $p = new Post;
         $p->title = $validatedData['title'];
@@ -45,7 +48,7 @@ class PostController extends Controller
         $p->save();
 
         return redirect()->route('pages.home')
-            ->with('success','Post updated successfully')
+            ->with('success','Post created successfully')
             ->with('image',$imageName);
     }
 
@@ -71,11 +74,14 @@ class PostController extends Controller
             'title' => 'required|max:255',
             'body' => 'required',
             'page_id' => 'required|integer',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
-        $imageName = time().'.'.$validatedData->image->extension(); 
-        $request->image->move(public_path('img'), $imageName);
+        $imageName = null;
+        if($request->image) {
+            $imageName = time().'.'.$request->image->extension(); 
+            $request->image->move(public_path('img'), $imageName);
+        }
 
         $p = Post::find($post->id);
         $p->title = $validatedData['title'];

@@ -9,7 +9,33 @@
 
 	<!-- Title -->
 
-	<h2 class="text-center">All Posts</h2>
+	<h2 class="text-center"> 
+		@if(Request::is('pages/1'))
+			White Water Posts
+		@elseif(Request::is('pages/2'))
+			Canoe Slalom Posts
+		@elseif(Request::is('pages/3'))
+			Canoe Polo Posts
+		@elseif(Request::is('pages/4'))
+			Off Topic Posts
+		@else
+			All Posts
+		@endif
+	</h2>
+
+	<p class="text-center">
+		@if(Request::is('pages/1'))
+			Welcome to the white water page, feel free to post anything whitewater related!
+		@elseif(Request::is('pages/2'))
+			Welcome to the canoe slalom page, feel free to post anything slalom related!
+		@elseif(Request::is('pages/3'))
+			Welcome to the canoe polo page, feel free to post anything polo related!
+		@elseif(Request::is('pages/4'))
+			Welcome to the off topic page, feel free to post anything on your mind!
+		@else
+			Welcome to my blog about kayaking.
+		@endif
+	</p>
 
 	<!-- Not logged in --> 
 	@guest
@@ -33,30 +59,31 @@
 			@csrf
 			<div class="row container-fluid border-bottom">
 				<div class="col-md-auto">
-					<img class="rounded-circle" src="{{URL::asset('/img/user.png')}}" alt="profile avatar" width="70"> <!-- Profile picture -->
+					<img class="rounded-circle" src="{{asset('/img/' .Auth::user()->avatar)}}" width="70"/> <!-- Profile picture -->
 				</div>
 				
 				<div class="col my-auto container-fluid">
 					<div>
-						<input class="container-fluid my-1" type="text" name="title" placeholder="Enter Title here {{ Auth::user()->name }}." value="{{ old('title') }}"> <!-- Title form -->
+						<input class="container-fluid my-2" type="text" name="title" placeholder="Title" value="{{ old('title') }}"> <!-- Title form -->
 					</div>
 					<div>Page ID: <!-- Page id form -->
 						<select class="mb-2" name="page_id">
-							<option @if(Request::is('pages/1') == 1) selected="selected" @endif value="1">White Water</option>
-							<option @if(Request::is('pages/2') == 1) selected="selected" @endif value="2">Canoe Slalom</option>
-							<option @if(Request::is('pages/3') == 1) selected="selected" @endif value="3">Canoe Polo</option>
-							<option @if(Request::is('pages/4') == 1) selected="selected" @endif value="4">Off Topic</option>
+							<option @if(Request::is('pages/1')) selected="selected" @endif value="1">White Water</option>
+							<option @if(Request::is('pages/2')) selected="selected" @endif value="2">Canoe Slalom</option>
+							<option @if(Request::is('pages/3')) selected="selected" @endif value="3">Canoe Polo</option>
+							<option @if(Request::is('pages/4')) selected="selected" @endif value="4">Off Topic</option>
 						</select>
 					</div>
 				</div>
 			</div>
+			<!-- Body -->
 			<div class="row my-2 ml-1 container-fluid">
-				<textarea class="text-muted container-fluid" name="body" placeholder="Hi {{ Auth::user()->name }}, what's on your mind today?"></textarea> <!-- body -->
+				<textarea class="text container-fluid" name="body" placeholder="Hi {{ Auth::user()->name }}, what's on your mind today?"></textarea> <!-- body -->
 			</div>
 			<!-- Image upload -->
-			<div>
+			<div class="row my-2 ml-1 container-fluid border-bottom">
+				<strong>Choose image</strong>
 				<input type="file" class="form-control-file" name="image" id="imageFile" aria-describedby="fileHelp">
-				<small id="fileHelp" class="form-text text-muted">Upload image!</small>
 			</div>
 			<!-- Submit button -->
 			<div class="row my-2 ml-1 container-fluid">
