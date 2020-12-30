@@ -33,10 +33,11 @@ class CommentController extends Controller
     {
         if(Auth::user()->id === $comment->user->id) {
             return view('comments.edit', ['comment' => $comment]);
+        } elseif(Auth::user()->role->name === "moderator" || Auth::user()->role->name === "admin") {
+            return view('comments.edit', ['comment' => $comment]);
         } else {
             return abort(403);
         }
-        return false;
     }
 
     public function update(Request $request, Comment $comment)
@@ -61,10 +62,12 @@ class CommentController extends Controller
         if(Auth::user()->id === $comment->user->id) {
             $comment->delete();
             return redirect()->route('posts.show', ['post'=>$comment->post->id])->with('success', 'Comment was deleted.');
+        } elseif(Auth::user()->role->name === "moderator" || Auth::user()->role->name === "admin") {
+            $comment->delete();
+            return redirect()->route('posts.show', ['post'=>$comment->post->id])->with('success', 'Comment was deleted.');
         } else {
             return abort(403);
         }
-        return false;
     }
 
 }

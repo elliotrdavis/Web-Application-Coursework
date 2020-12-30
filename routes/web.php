@@ -4,8 +4,8 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
-use App\Http\Controllers\ImageUploadController;
-use App\Http\Controllers\AvatarUploadController;
+use App\Http\Controllers\AdminController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,6 +57,13 @@ Route::post('/comments/update/{comment}', [CommentController::class, 'update'])-
 Route::delete('comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 
 // Auth
+
+Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+
+Route::get('/admin/edit/{user}', [AdminController::class, 'edit'])->name('admin.edit');
+
+Route::post('/admin/update/{user}', [AdminController::class, 'update'])->name('admin.update');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserTableSeeder extends Seeder
 {
@@ -26,6 +27,15 @@ class UserTableSeeder extends Seeder
                 $friends->random(rand(1,10))->pluck('id')->toArray()
             );
         });
+
+        // Create admin user
+        User::create(
+            ['name' => 'Elliot Davis',
+            'email' => '959547@swansea.ac.uk',
+            'email_verified_at' => now(),
+            'password' => Hash::make('password'),
+            'role_id'=>3,
+        ]);
 
     }
 }

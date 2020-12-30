@@ -42,7 +42,7 @@ User {{ $user->id }}
                     <h1> {{ $user->name }} </h1> 
                 </div>
                 <div class="col-md-auto mt-2">
-                    @if(Auth::id() === $user->id)
+                    @if(Auth::id() === $user->id || Auth::user()->role->name === "admin" || Auth::user()->role->name === "moderator")
                         <a href="{{ route('users.edit', ['user' => $user]) }}" class="btn btn-primary active" role="button" aria-pressed="true">Edit Profile</a>
                     @endif
                 </div>
@@ -145,7 +145,7 @@ User {{ $user->id }}
 			</div>
 
 			<div class="read-more ml-auto mr-5 bg-white">
-				@if(Auth::id() === $post->user->id)
+				@if(Auth::id() === $post->user->id || Auth::user()->role->name === "admin" || Auth::user()->role->name === "moderator")
 					<a href="{{ route('posts.edit', ['post' => $post]) }}" class="btn btn-primary active" role="button" aria-pressed="true">Edit</a>
 				@endif
 				<a href="{{ route('posts.show', ['post' => $post]) }}" class="btn btn-primary active" role="button" aria-pressed="true">Read More</a>

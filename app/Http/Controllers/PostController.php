@@ -60,16 +60,11 @@ class PostController extends Controller
     {
         if(Auth::user()->id === $post->user->id) {
             return view('posts.edit', ['post' => $post]);
+        } elseif(Auth::user()->role->name === "moderator" || Auth::user()->role->name === "admin") {
+            return view('posts.edit', ['post' => $post]);
         } else {
             return abort(403);
         }
-        
-        return false;
-    }
-
-    public function imageUpload()
-    {
-        return view('imageUpload');
     }
 
     public function update(Request $request, Post $post)
@@ -106,10 +101,12 @@ class PostController extends Controller
         if(Auth::user()->id === $post->user->id) {
             $post->delete();
             return redirect()->route('pages.home')->with('success', 'Post was deleted.');
+        } elseif(Auth::user()->role->name === "moderator" || Auth::user()->role->name === "admin") {
+            $post->delete();
+            return redirect()->route('pages.home')->with('success', 'Post was deleted.');
         } else {
             return abort(403);
         }
-        return false;
     }
 
 }

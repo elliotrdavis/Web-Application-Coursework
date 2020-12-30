@@ -34,7 +34,7 @@
 			</div>
 
 			<div class="read-more ml-auto mr-5 bg-white">
-				@if(Auth::id() === $post->user->id)
+				@if(Auth::id() === $post->user->id || Auth::user()->role->name === "admin" || Auth::user()->role->name === "moderator")
 					<a href="{{ route('posts.edit', ['post' => $post]) }}" class="btn btn-primary active" role="button" aria-pressed="true">Edit</a>
 				@endif
 				<a href="{{ route('posts.show', ['post' => $post]) }}" class="btn btn-primary active" role="button" aria-pressed="true">Read More</a>
