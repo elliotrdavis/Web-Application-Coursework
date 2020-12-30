@@ -15,6 +15,10 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
+        $post = Post::with(['comments' => function ($q) {
+            $q->orderBy('created_at', 'desc');
+          }])->find($post->id);
+          
         return view('posts.show', ['post' => $post]);
     }
 
@@ -101,7 +105,7 @@ class PostController extends Controller
 
         if(Auth::user()->id === $post->user->id) {
             $post->delete();
-            return redirect()->route('pages.home')->with('message', 'Post was deleted.');
+            return redirect()->route('pages.home')->with('success', 'Post was deleted.');
         } else {
             return abort(403);
         }

@@ -56,18 +56,6 @@ Route::post('/comments/update/{comment}', [CommentController::class, 'update'])-
 
 Route::delete('comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 
-// Upload avatar
-
-Route::get('avatar-upload', [ AvatarUploadController::class, 'avatarUpload' ])->name('avatar.upload');
-
-Route::post('avatar-upload', [ AvatarUploadController::class, 'avatarUploadPost' ])->name('avatar.upload.post');
-
-// Upload for post images
-
-Route::get('image-upload', [ ImageUploadController::class, 'imageUpload' ])->name('image.upload');
-
-Route::post('image-upload', [ ImageUploadController::class, 'imageUploadPost' ])->name('image.upload.post');
-
 // Auth
 Auth::routes();
 

@@ -55,7 +55,7 @@ class UserController extends Controller
         $u->save();
 
         return redirect()->route('users.show', ['user' => Auth::user()])
-            ->with('success','You have successfully upload image.')
+            ->with('success','You have successfully updated your profile')
             ->with('image',$avatarName); 
     
     }

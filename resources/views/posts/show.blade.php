@@ -5,7 +5,32 @@
 @endsection
 
 @section('content')
-    <div class="container mb-5 bg-white border rounded shadow p-3">
+
+<!-- Error messages -->
+<div class="row justify-content-center">
+    <div class="row">
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+        @endif
+
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+    </div>
+</div>
+
+<div class="container mb-5 bg-white border rounded shadow p-3">
+
     <div class="title">
         <h1>{{ $post->title }}</h1>
     </div>
@@ -31,8 +56,11 @@
         @endif
     </div>
 
-
-    <!-- image here -->
+    <div class="image-post d-flex justify-content-center bg-white p-2 px-4">
+        @if($post->image)
+            <img class="img-fluid" src="{{asset('/img/' .$post->image)}}"/> <!-- Display images -->
+        @endif
+    </div>
 
     <div class="body">
         {{ $post->body }}
@@ -55,6 +83,7 @@
     </form>
 
     <!-- comments -->
+
     @foreach($post->comments as $comment)
     <div class="comment-bottom d-flex flex-row align-items-center text-left comment-top p-2 px-5 bg-white border-top">
         <div class="profile-image">
@@ -62,7 +91,7 @@
         </div>
         <div class="d-flex flex-column ml-3">
             <div class="d-flex flex-row post-title">
-                <a href="{{ route('users.show', ['user' => $comment->user]) }}"><h6 class="mt-2">{{ $comment->user->name}}</h6></a>
+                <a href="{{ route('users.show', ['user' => $comment->user]) }}"><h6 class="mt-2">{{ $comment->user->name }}</h6></a>
                     <span class="ml-2 mt-1">{{ $comment->created_at->diffForHumans()}}</span>
                 @if(Auth::id() === $comment->user->id)
                 

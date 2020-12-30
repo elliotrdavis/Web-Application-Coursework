@@ -10,8 +10,7 @@ User {{ $user->id }}
 	<div class="row mx-1 border-bottom">
 		<div class="profile-image col-md-auto">
             <img class="rounded-circle" src="{{asset('/img/' .$user->avatar)}}" width="200"/> <!-- show profile image -->
-            <div class="row ml-2 mt-2">
-            </div>
+            
             <!-- Error message -->
             <div class="row justify-content-center">
                 <div class="row">

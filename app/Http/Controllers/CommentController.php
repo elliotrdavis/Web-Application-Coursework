@@ -25,7 +25,7 @@ class CommentController extends Controller
         $c->post_id = $post->id;
         $c->save();
 
-        session()->flash('message', 'Comment was created.');
+        session()->flash('success', 'Comment was created.');
         return redirect()->route('posts.show', ['post' => $post]);
     }
 
@@ -52,7 +52,7 @@ class CommentController extends Controller
         $c->post_id = $post_id;
         $c->save();
     
-        return redirect()->route('posts.show', ['post'=>$comment->post->id])->with('success','Product updated successfully');
+        return redirect()->route('posts.show', ['post'=>$comment->post->id])->with('success','Comment updated successfully');
     }
 
     public function destroy(Comment $comment)
@@ -60,7 +60,7 @@ class CommentController extends Controller
 
         if(Auth::user()->id === $comment->user->id) {
             $comment->delete();
-            return redirect()->route('posts.show', ['post'=>$comment->post->id])->with('message', 'Comment was deleted.');
+            return redirect()->route('posts.show', ['post'=>$comment->post->id])->with('success', 'Comment was deleted.');
         } else {
             return abort(403);
         }
