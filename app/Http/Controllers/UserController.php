@@ -41,9 +41,11 @@ class UserController extends Controller
             'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $avatarName = time().'.'.$request->avatar->extension();  
-     
-        $request->avatar->move(public_path('img'), $avatarName);
+        $avatarName = $user->avatar;
+        if($request->avatar) {
+            $avatarName = time().'.'.$request->avatar->extension();  
+            $request->avatar->move(public_path('img'), $avatarName);
+        }
 
         $u = User::find($user->id);
         $u->name = $validatedData['name'];

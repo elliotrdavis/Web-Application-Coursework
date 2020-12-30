@@ -77,7 +77,7 @@ class PostController extends Controller
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
-        $imageName = null;
+        $imageName = $post->image;
         if($request->image) {
             $imageName = time().'.'.$request->image->extension(); 
             $request->image->move(public_path('img'), $imageName);

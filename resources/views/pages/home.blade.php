@@ -83,7 +83,7 @@
 			<!-- Image upload -->
 			<div class="row my-2 ml-1 container-fluid border-bottom">
 				<strong>Choose image</strong>
-				<input type="file" class="form-control-file" name="image" id="imageFile" aria-describedby="fileHelp">
+				<input type="file" class="form-control-file mb-2" name="image" id="imageFile" aria-describedby="fileHelp">
 			</div>
 			<!-- Submit button -->
 			<div class="row my-2 ml-1 container-fluid">
