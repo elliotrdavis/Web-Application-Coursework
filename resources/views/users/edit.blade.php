@@ -20,6 +20,10 @@
                 Bio
                 <input class="container-fluid my-1" type="text" name="bio" value="{{ $user->bio }}">
             </div>
+            <div>
+                Phone Number
+                <input class="container-fluid my-1" type="number" name="number" value="{{ $user->phone->number }}">
+            </div>
 
             <div class="row container-fluid my-2">
                 <!--<input type="file" class="form-control-file" name="avatar" id="avatarFile" aria-describedby="fileHelp">-->

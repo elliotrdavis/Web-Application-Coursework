@@ -1,6 +1,5 @@
 
 @foreach($posts as $post)
-
 <div class="container mb-5">
     <div class="d-flex justify-content-center row">
         <div class="d-flex flex-column col-md-8 bg-white border rounded shadow p-3">
@@ -34,8 +33,10 @@
 			</div>
 
 			<div class="read-more ml-auto mr-5 bg-white">
-				@if(Auth::id() === $post->user->id || Auth::user()->role->name === "admin" || Auth::user()->role->name === "moderator")
-					<a href="{{ route('posts.edit', ['post' => $post]) }}" class="btn btn-primary active" role="button" aria-pressed="true">Edit</a>
+				@if(Auth::check())
+					@if(Auth::id() === $post->user->id || Auth::user()->role->name === "admin" || Auth::user()->role->name === "moderator")
+						<a href="{{ route('posts.edit', ['post' => $post]) }}" class="btn btn-primary active" role="button" aria-pressed="true">Edit</a>
+					@endif
 				@endif
 				<a href="{{ route('posts.show', ['post' => $post]) }}" class="btn btn-primary active" role="button" aria-pressed="true">Read More</a>
 			</div>				

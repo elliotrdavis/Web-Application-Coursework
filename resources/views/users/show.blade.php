@@ -42,10 +42,13 @@ User {{ $user->id }}
                     <h1> {{ $user->name }} </h1> 
                 </div>
                 <div class="col-md-auto mt-2">
-                    @if(Auth::id() === $user->id || Auth::user()->role->name === "admin" || Auth::user()->role->name === "moderator")
-                        <a href="{{ route('users.edit', ['user' => $user]) }}" class="btn btn-primary active" role="button" aria-pressed="true">Edit Profile</a>
+                    @if(Auth::check())
+                        @if(Auth::id() === $user->id || Auth::user()->role->name === "admin" || Auth::user()->role->name === "moderator")
+                            <a href="{{ route('users.edit', ['user' => $user]) }}" class="btn btn-primary active" role="button" aria-pressed="true">Edit Profile</a>
+                        @endif
                     @endif
                 </div>
+                
             </div>
 
 			<div class="bio grey"> <!-- Bio -->
@@ -69,6 +72,11 @@ User {{ $user->id }}
                                 <p>Profile Created at</p>
                                 <p>Number of Posts</p>
                                 <p>Number of Comments</p>
+                                @if(Auth::check())
+                                    @if(Auth::id() === $user->id || Auth::user()->role->name === "admin" || Auth::user()->role->name === "moderator")
+                                        <p>Phone Number</p>
+                                    @endif
+                                @endif
                             </b>
                         </div>
                         <div class="details col-md-auto">
@@ -77,6 +85,11 @@ User {{ $user->id }}
                             <p> {{ $user->created_at }} </p>
                             <p> {{ $user->posts->count() }} </p>
                             <p> {{ $user->comments->count() }} </p>
+                            @if(Auth::check())
+                                @if(Auth::id() === $user->id || Auth::user()->role->name === "admin" || Auth::user()->role->name === "moderator")
+                                    <p> {{ $user->phone->number }} </p>
+                                @endif
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -145,9 +158,11 @@ User {{ $user->id }}
 			</div>
 
 			<div class="read-more ml-auto mr-5 bg-white">
-				@if(Auth::id() === $post->user->id || Auth::user()->role->name === "admin" || Auth::user()->role->name === "moderator")
-					<a href="{{ route('posts.edit', ['post' => $post]) }}" class="btn btn-primary active" role="button" aria-pressed="true">Edit</a>
-				@endif
+                @if(Auth::check())
+				    @if(Auth::id() === $post->user->id || Auth::user()->role->name === "admin" || Auth::user()->role->name === "moderator")
+					    <a href="{{ route('posts.edit', ['post' => $post]) }}" class="btn btn-primary active" role="button" aria-pressed="true">Edit</a>
+                    @endif
+                @endif
 				<a href="{{ route('posts.show', ['post' => $post]) }}" class="btn btn-primary active" role="button" aria-pressed="true">Read More</a>
 			</div>				
         </div>

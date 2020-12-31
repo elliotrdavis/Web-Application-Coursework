@@ -42,17 +42,19 @@
         <div class="col-md-auto my-auto">
             <h5> Posted on {{ $post->created_at->format('jS F Y h:i:s A')}}</h5>
         </div>
-        @if(Auth::id() === $post->user->id || Auth::user()->role->name === "admin" || Auth::user()->role->name === "moderator")
-        <div class="col-md-auto my-2">
-            <a href="{{ route('posts.edit', ['post' => $post]) }}" class="btn btn-primary active" role="button" aria-pressed="true">Edit</a>
-        </div>
-        <div class="col-md-auto my-2">
-            <form method="POST" action="{{ route('posts.destroy', ['post' => $post->id]) }}" >
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-primary active" role="button" aria-pressed="true">Delete</button>
-            </form>
-        </div>
+        @if(Auth::check())
+            @if(Auth::id() === $post->user->id || Auth::user()->role->name === "admin" || Auth::user()->role->name === "moderator")
+            <div class="col-md-auto my-2">
+                <a href="{{ route('posts.edit', ['post' => $post]) }}" class="btn btn-primary active" role="button" aria-pressed="true">Edit</a>
+            </div>
+            <div class="col-md-auto my-2">
+                <form method="POST" action="{{ route('posts.destroy', ['post' => $post->id]) }}" >
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-primary active" role="button" aria-pressed="true">Delete</button>
+                </form>
+            </div>
+            @endif
         @endif
     </div>
 
@@ -92,16 +94,17 @@
         <div class="d-flex flex-column ml-3">
             <div class="d-flex flex-row post-title">
                 <a href="{{ route('users.show', ['user' => $comment->user]) }}"><h6 class="mt-2">{{ $comment->user->name }}</h6></a>
-                    <span class="ml-2 mt-1">{{ $comment->created_at->diffForHumans()}}</span>
-                @if(Auth::id() === $comment->user->id || Auth::user()->role->name === "admin" || Auth::user()->role->name === "moderator")
-                
-                    <a href="{{ route('comments.edit', ['comment' => $comment]) }}" class="btn btn-link btn-sm">Edit</a>
+                <span class="ml-2 mt-1">{{ $comment->created_at->diffForHumans()}}</span>
+                @if(Auth::check())
+                    @if(Auth::id() === $comment->user->id || Auth::user()->role->name === "admin" || Auth::user()->role->name === "moderator")
+                        <a href="{{ route('comments.edit', ['comment' => $comment]) }}" class="btn btn-link btn-sm">Edit</a>
             
-                    <form method="POST" action="{{ route('comments.destroy', ['comment' => $comment->id]) }}" >
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-link btn-sm">Delete</button>
-                    </form>
+                        <form method="POST" action="{{ route('comments.destroy', ['comment' => $comment->id]) }}" >
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-link btn-sm">Delete</button>
+                        </form>
+                    @endif
                 @endif
             </div>
             

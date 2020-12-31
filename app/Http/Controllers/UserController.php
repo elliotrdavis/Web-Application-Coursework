@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Phone;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,6 +26,8 @@ class UserController extends Controller
     {
         if(Auth::user()->id === $user->id) {
             return view('users.edit', ['user' => $user]);
+        } elseif(Auth::user()->role->name === "moderator" || Auth::user()->role->name === "admin") {
+            return view('users.edit', ['user' => $user]);
         } else {
             return abort(403);
         }
@@ -39,6 +42,7 @@ class UserController extends Controller
             'email' => 'unique:users,email,'.$user->id,
             'bio' => 'max:500',
             'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'number' => 'size:11',
         ]);
 
         $avatarName = $user->avatar;
@@ -53,6 +57,12 @@ class UserController extends Controller
         $u->bio = $validatedData['bio'];
         $u->avatar = $avatarName;
         $u->save();
+
+        
+        $p = new Phone;
+        $p->user_id = $user->id;
+        $p->number = $validatedData['number'];
+        $p->save();
 
         return redirect()->route('users.show', ['user' => Auth::user()])
             ->with('success','You have successfully updated your profile')
