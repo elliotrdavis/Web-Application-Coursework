@@ -29,9 +29,14 @@ Route::get('/users', [UserController::class, 'index'])->name('users.index');
 
 Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
 
+Route::get('/users/addFriend/{user}', [UserController::class, 'addFriend'])->name('users.addFriend');
+
+Route::get('/users/removeFriend/{user}', [UserController::class, 'removeFriend'])->name('users.removeFriend');
+
 Route::get('/users/edit/{user}', [UserController::class, 'edit'])->name('users.edit');
 
 Route::post('/users/update/{user}', [UserController::class, 'update'])->name('users.update');
+
 
 // Posts
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');

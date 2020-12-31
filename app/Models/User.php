@@ -29,6 +29,14 @@ class User extends Authenticatable
 		return $this->belongsToMany('\App\Models\User', 'users_friends', 'user_id', 'friend_id');
     }
 
+    public function addFriend(User $user) {
+        $this->friends()->attach($user->id);
+    }
+
+    public function removeFriend(User $user) {
+        $this->friends()->detach($user->id);
+    }
+
     public function role()
     {
         return $this->belongsTo('\App\Models\Role');

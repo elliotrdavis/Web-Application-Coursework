@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
 
-            $table->bigInteger('role_id')->unsigned();
+            $table->bigInteger('role_id')->unsigned()->default(1);
 
             // Create foreign key for role and user one-many relationship.
             $table->foreign('role_id')->references('id')->on('roles')

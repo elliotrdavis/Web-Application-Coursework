@@ -48,7 +48,18 @@ User {{ $user->id }}
                         @endif
                     @endif
                 </div>
-                
+                <div class="col-md-auto mt-2">
+                    @if(Auth::check())
+                        @if(Auth::id() != $user->id)
+                            @if(Auth::user()->friends()->where('id', $user->id)->count() === 0)
+                                <a href="{{ route('users.addFriend', ['user' => $user]) }}" class="btn btn-primary active" role="button" aria-pressed="true">Follow</a>
+                            @endif
+                            @if(Auth::user()->friends()->where('id', $user->id)->count() === 1)
+                                <a href="{{ route('users.removeFriend', ['user' => $user]) }}" class="btn btn-primary active" role="button" aria-pressed="true">Unfollow</a>
+                            @endif
+                        @endif
+                    @endif
+                </div>
             </div>
 
 			<div class="bio grey"> <!-- Bio -->

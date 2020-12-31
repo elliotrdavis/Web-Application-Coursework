@@ -70,4 +70,18 @@ class UserController extends Controller
     
     }
 
+    public function addFriend(User $user) {
+        Auth::user()->addFriend($user);
+
+        return redirect()->route('users.show', ['user' => $user])
+        ->with('success','You are now follow this user.');
+    }
+
+    public function removeFriend(User $user) {
+        Auth::user()->removeFriend($user);
+
+        return redirect()->route('users.show', ['user' => $user])
+        ->with('success','You have unfollowed this user.');
+    }
+
 }
