@@ -70,7 +70,7 @@ User {{ $user->id }}
             <nav> <!-- Details and friends list -->
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                   <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Details</a>
-                  <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Friends ({{ $user->friends->count() }})</a>
+                  <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Following ({{ $user->friends->count() }})</a>
                 </div>
               </nav>
               <div class="tab-content" id="nav-tabContent">
@@ -127,9 +127,6 @@ User {{ $user->id }}
                             </div>
                     <?php
                         if($rowCount % $numOfCols == 0) { ?> </div> <?php } } ?>
-                    @foreach($user->friends as $friend)
-
-                    @endforeach
                 </div>
               </div>
 		</div>

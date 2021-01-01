@@ -39,11 +39,9 @@ Route::post('/users/update/{user}', [UserController::class, 'update'])->name('us
 
 
 // Posts
-Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+//Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 
 Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
-
-Route::post('/posts/{post}', [CommentController::class, 'store'])->name('comments.store');
 
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 
@@ -54,6 +52,12 @@ Route::post('/posts/update/{post}', [PostController::class, 'update'])->name('po
 Route::delete('posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 
 // Edit/Delete Comments
+
+//Route::post('/posts/{post}', [CommentController::class, 'store'])->name('comments.store');
+
+//Route::get('/posts', [CommentController::class, 'commentRequest'])->name('comment.request');
+
+Route::post('/posts/{post}', [CommentController::class, 'commentRequestPost'])->name('comment.request.store');
 
 Route::get('/comments/edit/{comment}', [CommentController::class, 'edit'])->name('comments.edit');
 

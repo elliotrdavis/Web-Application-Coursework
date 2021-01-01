@@ -68,8 +68,9 @@
         {{ $post->body }}
     </div>
 
-    <form method="POST" action="{{ route('comments.store', ['post' => $post]) }}">
-        @csrf
+    <!-- write comment -->
+
+    
     <div class="row container-fluid my-3">
 		<div class="col-md-auto">
 			<img class="rounded-circle" src="{{URL::asset('/img/user.png')}}" alt="profile avatar" width="40">
@@ -77,12 +78,22 @@
 		
 		<div class="col my-auto container-fluid">
 			<div>
-                <input type="text" class="form-control mr-3" name="body" placeholder="Add comment">
-                <input class="btn btn-primary active mt-2" aria-pressed="true" type="submit" value="Comment">
+                <form>
+                    @csrf
+                    <div class="form-group">
+                        <label for="body">Body:</label>
+                        <input type="text" class="form-control" id="body" placeholder="Enter comment" name="body">
+                        <span class="text-danger error-text"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-submit">Submit</button>
+                </form>
+                <!--<input class="btn btn-success btn-submit btn-primary active mt-2" aria-pressed="true" type="submit" value="Comment">-->
             </div>
         </div>
     </div>
-    </form>
+
+    
+    
 
     <!-- comments -->
 
@@ -116,4 +127,63 @@
     @endforeach
 </div>
 
+<!--<script type="text/javascript">
+    $(document).ready(function() {
+        $(".btn-submit").click(function(e){
+            e.preventDefault();
+
+            var body = $("#body").val();
+
+
+            $.ajax({
+                url: "{{ route('comment.request.store', ['post' => $post]) }}",
+                type:'POST',
+                data: {"_token": "{{ csrf_token() }}",body:body},
+                success: function(data) {
+                  console.log(data.error)
+                    if($.isEmptyObject(data.error)){
+                        alert(data.success);
+                    }else{
+                        printErrorMsg(data.error);
+                    }
+                }
+            });
+        }); 
+
+        function printErrorMsg (msg) {
+            $.each( msg, function( key, value ) {
+            console.log(key);
+              $('.'+key+'_err').text(value);
+            });
+        }
+    });
+</script>-->
+
+<script type="text/javascript">
+   
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+   
+    $(".btn-submit").click(function(e){
+  
+        e.preventDefault();
+   
+        var body = $("#body").val();
+   
+        $.ajax({
+           type:'POST',
+           url:"{{ route('comment.request.store', ['post' => $post]) }}",
+           data:{body:body},
+           success:function(data){
+              alert(data.success);
+           }
+        });
+  
+    });
+</script>
+
 @endsection
+
