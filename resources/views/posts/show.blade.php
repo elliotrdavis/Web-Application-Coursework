@@ -178,7 +178,7 @@
            url:"{{ route('comment.request.store', ['post' => $post]) }}",
            data:{body:body},
            success:function(data){
-              alert(data.success);
+                location.reload();
            }
         });
   
