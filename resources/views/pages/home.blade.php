@@ -62,10 +62,8 @@
 
 	<!-- Not logged in --> 
 	@guest
-	<div class="container mb-5 col-md-7 bg-white border rounded shadow p-1">
-		<div class="row my-2 ml-1 container-fluid border-bottom">
-			<h5>Please login to post</h5>
-		</div>
+	<div class="container-fluid d-flex justify-content-center">
+		<strong>Please login to post.</strong>
 	</div>
 
 	<!-- If logged in -->
@@ -75,12 +73,12 @@
 	<!-- Create post container -->
 
 	<div class="container mb-5 col-md-7 bg-white border rounded shadow p-1">
-		<div class="row my-2 ml-1 container-fluid border-bottom">
+		<div class="container-fluid d-flex justify-content-center border-bottom p-1">
 			<h3>Create Post</h3> <!-- Create post -->
 		</div>
 		<form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
 			@csrf
-			<div class="row container-fluid border-bottom">
+			<div class="row container-fluid mt-1">
 				<div class="col-md-auto">
 					<img class="rounded-circle" src="{{asset('/img/' .Auth::user()->avatar)}}" width="70"/> <!-- Profile picture -->
 				</div>
@@ -89,7 +87,7 @@
 					<div>
 						<input class="container-fluid my-2" type="text" name="title" placeholder="Title" value="{{ old('title') }}"> <!-- Title form -->
 					</div>
-					<div>Page ID: <!-- Page id form -->
+					<div><strong>Page ID:</strong> <!-- Page id form -->
 						<select class="mb-2" name="page_id">
 							<option @if(Request::is('pages/1')) selected="selected" @endif value="1">White Water</option>
 							<option @if(Request::is('pages/2')) selected="selected" @endif value="2">Canoe Slalom</option>
@@ -101,10 +99,10 @@
 			</div>
 			<!-- Body -->
 			<div class="row my-2 ml-1 container-fluid">
-				<textarea class="text container-fluid" name="body" placeholder="Hi {{ Auth::user()->name }}, what's on your mind today?"></textarea> <!-- body -->
+				<textarea class="text container-fluid" name="body" placeholder="Hi {{ Auth::user()->name }}, what's on your mind today?" value="{{ old('body') }}"></textarea> <!-- body -->
 			</div>
 			<!-- Image upload -->
-			<div class="row my-2 ml-1 container-fluid border-bottom">
+			<div class="row ml-1 container-fluid border-bottom">
 				<strong>Choose image</strong>
 				<input type="file" class="form-control-file mb-2" name="image" id="imageFile" aria-describedby="fileHelp">
 			</div>

@@ -90,7 +90,7 @@ class PostController extends Controller
         $p->image = $imageName;
         $p->save();
     
-        return redirect()->route('pages.home')
+        return redirect()->route('posts.show', ['post' => $post])
             ->with('success','Post updated successfully')
             ->with('image',$imageName);
     }

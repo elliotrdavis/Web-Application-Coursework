@@ -92,8 +92,6 @@
         </div>
     </div>
 
-    
-    
 
     <!-- comments -->
 
@@ -126,38 +124,6 @@
     </div>		
     @endforeach
 </div>
-
-<!--<script type="text/javascript">
-    $(document).ready(function() {
-        $(".btn-submit").click(function(e){
-            e.preventDefault();
-
-            var body = $("#body").val();
-
-
-            $.ajax({
-                url: "{{ route('comment.request.store', ['post' => $post]) }}",
-                type:'POST',
-                data: {"_token": "{{ csrf_token() }}",body:body},
-                success: function(data) {
-                  console.log(data.error)
-                    if($.isEmptyObject(data.error)){
-                        alert(data.success);
-                    }else{
-                        printErrorMsg(data.error);
-                    }
-                }
-            });
-        }); 
-
-        function printErrorMsg (msg) {
-            $.each( msg, function( key, value ) {
-            console.log(key);
-              $('.'+key+'_err').text(value);
-            });
-        }
-    });
-</script>-->
 
 <script type="text/javascript">
    

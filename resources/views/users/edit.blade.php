@@ -5,6 +5,30 @@
 @endsection
 
 @section('content')
+
+    <!-- Error/success messages -->
+	<div class="row justify-content-center">
+		<div class="row">
+			@if ($message = Session::get('success'))
+				<div class="alert alert-success alert-block">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					<strong>{{ $message }}</strong>
+				</div>
+			@endif
+
+			@if (count($errors) > 0)
+				<div class="alert alert-danger">
+					<strong>Whoops!</strong> There were some problems with your input.<br><br>
+					<ul>
+						@foreach ($errors->all() as $error)
+							<li>{{ $error }}</li>
+						@endforeach
+					</ul>
+				</div>
+			@endif
+		</div>
+	</div>
+
     <div class="container mb-5 bg-white border rounded shadow p-3">
         <form method="POST" action="{{ route('users.update', ['user' => $user]) }}" enctype="multipart/form-data">
             @csrf
@@ -30,7 +54,7 @@
                 <div class="row">
                     <div class="col-md-auto">
                         @if($user->avatar)
-                            <img width="50" src="{{asset('/img/' .$user->avatar)}}"/> <!-- Display images -->
+                            <img class="rounded-circle" width="50" src="{{asset('/img/' .$user->avatar)}}"/> <!-- Display images -->
                         @endif
                     </div>
                     <div class="col">

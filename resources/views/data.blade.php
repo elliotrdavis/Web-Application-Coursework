@@ -22,17 +22,17 @@
                 </div>
 			</div>
 
-			<div class="image-post d-flex justify-content-center bg-white p-2 px-4">
+			<div class="image-post d-flex justify-content-center mt-1">
 				@if($post->image)
 					<img class="img-fluid" src="{{asset('/img/' .$post->image)}}"/> <!-- Display images -->
 				@endif
 			</div>
 
-			<div class="body-middle bg-white p-2 px-4">
+			<div class="body-middle bg-white p-1">
 				{{ \Illuminate\Support\Str::limit($post->body, 100) }}...
 			</div>
 
-			<div class="read-more ml-auto mr-5 bg-white">
+			<div class="read-more ml-auto mr-5">
 				@if(Auth::check())
 					@if(Auth::id() === $post->user->id || Auth::user()->role->name === "admin" || Auth::user()->role->name === "moderator")
 						<a href="{{ route('posts.edit', ['post' => $post]) }}" class="btn btn-primary active" role="button" aria-pressed="true">Edit</a>

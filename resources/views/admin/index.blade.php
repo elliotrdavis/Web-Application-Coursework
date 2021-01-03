@@ -3,7 +3,7 @@
 @section('title', 'Admin page')
 
 @section('content')
-
+<div class="bg-white">
     <!-- Error/success messages -->
 	<div class="row justify-content-center">
 		<div class="row">
@@ -90,5 +90,6 @@
         <li><a href="{{ route('posts.show', ['post' => $post]) }}">{{ $post->title }}</a></li>
     @endforeach
     </div>
+</div>
 
 @endsection

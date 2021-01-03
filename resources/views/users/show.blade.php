@@ -46,6 +46,9 @@ User {{ $user->id }}
                         @if(Auth::id() === $user->id || Auth::user()->role->name === "admin" || Auth::user()->role->name === "moderator")
                             <a href="{{ route('users.edit', ['user' => $user]) }}" class="btn btn-primary active" role="button" aria-pressed="true">Edit Profile</a>
                         @endif
+                        @if(Auth::user()->role->name === "admin")
+                            <a href="{{ route('admin.index') }}" class="btn btn-primary active" role="button" aria-pressed="true">Admin page</a>
+                        @endif
                     @endif
                 </div>
                 <div class="col-md-auto mt-2">

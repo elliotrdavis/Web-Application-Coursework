@@ -61,6 +61,7 @@ class CommentController extends Controller
         }
     }
 
+    // Not currently used
     public function update(Request $request, Comment $comment)
     {
         $post_id = $comment->post->id;
