@@ -21,7 +21,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Pages/Home page
-
 Route::get('/', [PageController::class, 'home'])->name('pages.home');
 
 Route::get('/pages/{page}', [PageController::class, 'show'])->name('pages.show');
@@ -38,6 +37,7 @@ Route::get('/users/edit/{user}', [UserController::class, 'edit'])->name('users.e
 
 Route::post('/users/update/{user}', [UserController::class, 'update'])->name('users.update');
 
+
 // Posts
 
 Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
@@ -52,6 +52,7 @@ Route::delete('posts/{post}', [PostController::class, 'destroy'])->name('posts.d
 
 // Edit/Delete Comments
 
+
 Route::post('/posts/{post}', [CommentController::class, 'commentRequestPost'])->name('comment.request.store');
 
 Route::get('/comments/edit/{comment}', [CommentController::class, 'edit'])->name('comments.edit');
@@ -63,6 +64,12 @@ Route::delete('comments/{comment}', [CommentController::class, 'destroy'])->name
 // Auth
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+
+Route::get('/admin/edit/{user}', [AdminController::class, 'edit'])->name('admin.edit');
+
+Route::post('/admin/update/{user}', [AdminController::class, 'update'])->name('admin.update');
+
+// Other
 
 Auth::routes();
 

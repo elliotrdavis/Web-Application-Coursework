@@ -11,6 +11,10 @@ input[type=text] {
     border-radius: 4px;
 }
 
+.post-body {
+    font-size: x-large;
+}
+
 
 textarea {
     width: 100%;

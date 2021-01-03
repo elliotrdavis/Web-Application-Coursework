@@ -64,16 +64,16 @@
         @endif
     </div>
 
-    <div class="body">
+    <div class="post-body">
         {{ $post->body }}
     </div>
 
     <!-- write comment -->
-
-    
+    @if(Auth::check())
+    <div class="border-top"><strong> Write A Comment!</strong></div>
     <div class="row container-fluid my-3">
 		<div class="col-md-auto">
-			<img class="rounded-circle" src="{{URL::asset('/img/user.png')}}" alt="profile avatar" width="40">
+            <img class="rounded-circle" src="{{asset('/img/' .Auth::user()->avatar)}}" width="40"/>
 		</div>
 		
 		<div class="col my-auto container-fluid">
@@ -81,7 +81,6 @@
                 <form>
                     @csrf
                     <div class="form-group">
-                        <label for="body">Body:</label>
                         <input type="text" class="form-control" id="body" placeholder="Enter comment" name="body">
                         <span class="text-danger error-text"></span>
                     </div>
@@ -91,14 +90,14 @@
             </div>
         </div>
     </div>
-
+    @endif
 
     <!-- comments -->
 
     @foreach($post->comments as $comment)
     <div class="comment-bottom d-flex flex-row align-items-center text-left comment-top p-2 px-5 bg-white border-top">
         <div class="profile-image">
-            <img class="rounded-circle" src="{{URL::asset('/img/user.png')}}" alt="profile avatar" width="40">
+            <img class="rounded-circle" src="{{asset('/img/' .$comment->user->avatar)}}" width="40"/>
         </div>
         <div class="d-flex flex-column ml-3">
             <div class="d-flex flex-row post-title">

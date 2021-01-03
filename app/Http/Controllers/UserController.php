@@ -42,7 +42,7 @@ class UserController extends Controller
             'email' => 'unique:users,email,'.$user->id,
             'bio' => 'max:500',
             'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'number' => 'size:11',
+            'number' => 'required',
         ]);
 
         $avatarName = $user->avatar;
@@ -57,7 +57,6 @@ class UserController extends Controller
         $u->bio = $validatedData['bio'];
         $u->avatar = $avatarName;
         $u->save();
-
         
         $p = new Phone;
         $p->user_id = $user->id;

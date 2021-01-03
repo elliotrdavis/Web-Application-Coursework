@@ -86,11 +86,6 @@ User {{ $user->id }}
                                 <p>Profile Created at</p>
                                 <p>Number of Posts</p>
                                 <p>Number of Comments</p>
-                                @if(Auth::check())
-                                    @if(Auth::id() === $user->id || Auth::user()->role->name === "admin" || Auth::user()->role->name === "moderator")
-                                        <p>Phone Number</p>
-                                    @endif
-                                @endif
                             </b>
                         </div>
                         <div class="details col-md-auto">
@@ -99,11 +94,6 @@ User {{ $user->id }}
                             <p> {{ $user->created_at }} </p>
                             <p> {{ $user->posts->count() }} </p>
                             <p> {{ $user->comments->count() }} </p>
-                            @if(Auth::check())
-                                @if(Auth::id() === $user->id || Auth::user()->role->name === "admin" || Auth::user()->role->name === "moderator")
-                                    <p> {{ $user->phone->number }} </p>
-                                @endif
-                            @endif
                         </div>
                     </div>
                 </div>
